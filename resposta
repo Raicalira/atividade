@@ -1,0 +1,52 @@
+1-Quantos usuários estão cadastrados no sistema?
+select COUNT(*) AS Total_usuario
+FROM usuarios;
+
+Total_usuario
+5
+
+2-Qual o peso médio dos usuários?
+select AVG(peso) AS peso_medio
+FROM usuarios;
+
+peso_medio
+73.0000000000000000
+
+3-Qual usuário possui a maior meta diária?
+select usuario_id, meta_ml
+FROM metas_diarias
+order by meta_ml desc
+limit 1;
+
+usuario_id                            meta_ml
+33333333-3333-3333-3333-333333333333  3150
+
+4-Qual usuário possui a menor meta diária?
+select usuario_id, meta_ml
+FROM metas_diarias
+order by meta_ml 
+limit 1;
+
+usuario_id                            meta_ml
+44444444-4444-4444-4444-444444444444  2000
+
+5-Qual o total de água ingerido por cada usuário?
+select usuario_id, SUM(quantidade_ml) as total_ingestao
+FROM ingestao_agua
+group by
+usuario_id
+
+usuario_id                            total_ingestao
+55555555-5555-5555-5555-555555555555  12300
+11111111-1111-1111-1111-111111111111  12300
+33333333-3333-3333-3333-333333333333  12300
+22222222-2222-2222-2222-222222222222  12300
+44444444-4444-4444-4444-444444444444  12300
+
+6-Qual o total de água ingerido em um dia específico?
+select SUM(quantidade_ml) as total_ingestao
+FROM ingestao_agua
+where cast( data_hora AS date) = '2026-04-15';
+
+total_ingestao
+10250
